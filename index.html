@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050508">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script>
+  window.__IS_PHONE =
+    /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
+    (navigator.maxTouchPoints > 0 &&
+      matchMedia("(pointer: coarse)").matches &&
+      matchMedia("(hover: none)").matches);
+  if (window.__IS_PHONE) document.documentElement.classList.add("phone");
+</script>
+<title>FOX QUREO — ثقافة / كيريو / لعبة الأسهم</title>
+<style>
+  :root{
+    --pureblack: #050508;
+    --carddark: #0d0c14;
+    --purple-primary: #9333ea;
+    --purple-light: #c084fc;
+    --purple-dark: #581c87;
+    --ink: #f3f4f6;
+    --ink-2: #d1d5db;
+    --muted: #9ca3af;
+    --line: rgba(147, 51, 234, 0.22);
+    --bg: #050508;
+    --surface: #0d0c14;
+    --surface-2: #13111c;
+    --amber: #f59e0b;
+    --amber-bg: rgba(245, 158, 11, 0.12);
+    --red: #ef4444;
+    --red-bg: rgba(239, 68, 68, 0.12);
+    --blue: #3b82f6;
+    --blue-bg: rgba(59, 130, 246, 0.12);
+    --radius-lg: 20px;
+    --radius: 14px;
+    --radius-sm: 10px;
+    --shadow-sm: 0 4px 20px rgba(147, 51, 234, 0.15);
+    --shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
+    --max: 980px;
+  }
+
+  /* ===== الوضع النهاري (أبيض مع بنفسجي نيون) ===== */
+  html:not(.dark){
+    --pureblack: #f8fafc;
+    --carddark: #ffffff;
+    --purple-primary: #7e22ce;
+    --purple-light: #9333ea;
+    --purple-dark: #581c87;
+    --ink: #0f172a;
+    --ink-2: #334155;
+    --muted: #64748b;
+    --line: rgba(147, 51, 234, 0.25);
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --shadow-sm: 0 4px 20px rgba(147, 51, 234, 0.1);
+    --shadow: 0 12px 35px rgba(126, 34, 206, 0.12);
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Cairo","Segoe UI","Noto Naskh Arabic",Tahoma,Arial,system-ui,sans-serif;
+    background-color: var(--pureblack);
+    background-image: 
+      radial-gradient(circle at 15% 20%, rgba(147, 51, 234, 0.14) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(107, 33, 168, 0.14) 0%, transparent 40%);
+    color:var(--ink);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  button{font-family:inherit}
+  button:focus-visible, input:focus-visible, summary:focus-visible{
+    outline:2px solid rgba(168, 85, 247, 0.6);
+    outline-offset:2px;
+  }
+  img{max-width:100%}
+
+  /* ===== Header ===== */
+  .app-header{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:18px 20px 6px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .brand{display:flex;align-items:center;gap:11px;min-width:0}
+  .brand-avatar{
+    width:42px;height:42px;border-radius:13px;object-fit:cover;flex:none;
+    border:1px solid var(--line);background:var(--surface-2);
+    box-shadow:0 2px 10px rgba(147, 51, 234, 0.25);
+  }
+  .brand h1{font-size:18px;line-height:1.2;margin:0;font-weight:900;letter-spacing:-.2px;}
+  html.dark .brand h1{color:#fff;}
+  html:not(.dark) .brand h1{color:#0f172a;}
+  .brand p{margin:3px 0 0;font-size:11.5px;color:var(--muted)}
+  .header-actions{margin-inline-start:auto;display:flex;align-items:center;gap:8px;flex:none}
+  .mock-pill{
+    display:inline-flex;align-items:center;gap:5px;
+    background:rgba(147, 51, 234, 0.16);color:var(--purple-light);
+    font-size:11px;font-weight:800;border-radius:999px;padding:5px 10px;
+    white-space:nowrap;border:1px solid rgba(147, 51, 234, 0.35);
+    box-shadow:0 0 15px rgba(147, 51, 234, 0.2);
+  }
+  .mock-pill i{width:6px;height:6px;border-radius:50%;background:var(--purple-light);display:inline-block}
+  
+  .theme-btn, .install-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink-2);
+    border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;
+    cursor:pointer;transition:.15s;white-space:nowrap;
+  }
+  .theme-btn:hover, .install-btn:hover{background:var(--surface-2);border-color:var(--purple-light)}
+
+  /* ===== Stepper ===== */
+  .stepper{
+    max-width:var(--max);
+    margin:8px auto 0;
+    padding:0 20px;
+    display:flex;
+    gap:4px;
+  }
+  .step{
+    flex:1;min-width:0;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:transparent;border:0;border-radius:12px;
+    padding:9px 6px;cursor:pointer;
+    color:var(--muted);transition:.18s;
+  }
+  .step .dot{
+    width:27px;height:27px;border-radius:50%;flex:none;
+    display:grid;place-items:center;
+    background:var(--surface-2);color:var(--muted);
+    font-size:12px;font-weight:800;
+    transition:.18s;border:1px solid var(--line);
+  }
+  .step .lbl{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .step:hover:not(.locked){background:rgba(147,51,234,0.08);color:var(--purple-light)}
+  .step.active{background:var(--surface);border:1px solid rgba(147,51,234,0.45);box-shadow:var(--shadow-sm)}
+  html.dark .step.active{color:#fff;}
+  html:not(.dark) .step.active{color:#0f172a;}
+  .step.active .dot{background:var(--purple-primary);color:#fff;box-shadow:0 0 0 4px rgba(147,51,234,0.28)}
+  .step.done .dot{background:rgba(147,51,234,0.22);color:var(--purple-light)}
+  .step.done .dot::before{content:"✓";font-size:13px}
+  .step.done .dot .num{display:none}
+  .step.locked{opacity:.45;cursor:not-allowed}
+
+  /* ===== Main ===== */
+  .wrap{max-width:var(--max);margin:0 auto;padding:10px 20px 120px}
+  .panel{
+    display:none;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);
+    padding:24px;
+  }
+  .panel.active{display:block;animation:panelIn .22s ease both}
+  @keyframes panelIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .panel-head{margin:0 0 16px}
+  .panel-head h2{margin:0 0 4px;font-size:19px;letter-spacing:-.3px;}
+  html.dark .panel-head h2{color:#fff;}
+  html:not(.dark) .panel-head h2{color:#0f172a;}
+  .panel-head p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.75}
+  .panel-head .kicker{
+    display:inline-block;font-size:10.5px;font-weight:800;color:var(--purple-light);
+    background:rgba(147,51,234,0.16);border-radius:999px;padding:4px 9px;margin-bottom:8px;
+    border:1px solid rgba(147,51,234,0.35);
+  }
+
+  /* ===== Type cards ===== */
+  .type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+  .type-card{
+    position:relative;display:flex;gap:12px;align-items:flex-start;
+    text-align:start;cursor:pointer;
+    background:var(--surface-2);border:1.5px solid var(--line);border-radius:16px;
+    padding:16px 16px 16px 38px;
+    transition:.18s;
+  }
+  .type-card:hover{border-color:var(--purple-light);box-shadow:0 8px 24px rgba(147,51,234,0.22);transform:translateY(-1px)}
+  .type-card.selected{border-color:var(--purple-primary);background:rgba(147,51,234,0.14);box-shadow:0 0 0 3px rgba(147,51,234,0.25)}
+  .type-icon{
+    width:43px;height:43px;border-radius:12px;flex:none;
+    display:grid;place-items:center;font-size:21px;
+    background:rgba(147,51,234,0.18);
+  }
+  .type-body{min-width:0;display:block;padding-top:1px}
+  .type-body b{display:block;font-size:14px;font-weight:800;margin-bottom:3px;}
+  html.dark .type-body b{color:#fff;}
+  html:not(.dark) .type-body b{color:#0f172a;}
+  .type-body small{display:block;font-size:11.5px;line-height:1.55;color:var(--muted)}
+  .type-check{
+    position:absolute;top:14px;inset-inline-end:14px;
+    width:20px;height:20px;border-radius:50%;
+    border:1.5px solid var(--line);background:var(--surface);
+    display:grid;place-items:center;
+    color:transparent;font-size:11px;font-weight:900;
+    transition:.18s;
+  }
+  .selected .type-check{background:var(--purple-primary);border-color:var(--purple-primary);color:#fff}
+  .sub-mode{margin-top:14px}
+  .sub-mode-title{
+    display:flex;align-items:center;gap:7px;
+    margin:0 2px 8px;font-size:12px;font-weight:800;color:var(--ink-2);
+  }
+  .sub-mode-title::before{
+    content:"";width:3px;height:14px;border-radius:2px;background:var(--purple-primary);flex:none;
+  }
+  .sub-mode-title span{font-weight:600;color:var(--muted)}
+  .type-card.type-second{
+    width:100%;
+    background:linear-gradient(180deg,rgba(147,51,234,0.06) 0%,var(--surface-2) 100%);
+    border-style:dashed;
+  }
+  .type-card.type-second:hover{border-style:solid}
+  .type-card.type-second.selected{border-style:solid}
+  .type-card.type-second .type-icon{background:rgba(59,130,246,0.18)}
+  .type-badge{
+    display:inline-flex;align-items:center;gap:4px;flex:none;
+    margin-inline-start:auto;align-self:center;
+    background:var(--blue-bg);color:#93c5fd;
+    font-size:10.5px;font-weight:800;border-radius:999px;padding:4px 9px;
+    white-space:nowrap;
+  }
+  .game-mobile-note{display:none;margin-top:10px}
+  .alert.game-mobile-note{display:none}
+
+  /* ===== Settings ===== */
+  .settings-block{margin-top:18px}
+  .settings-block:first-child{margin-top:0}
+  .block-title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;margin:0 0 9px;}
+  html.dark .block-title{color:#fff;}
+  html:not(.dark) .block-title{color:#0f172a;}
+  .block-title .n{
+    width:20px;height:20px;border-radius:7px;background:rgba(147,51,234,0.22);color:var(--purple-light);
+    display:grid;place-items:center;font-size:11px;font-weight:900;flex:none;
+  }
+  .choice-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .choice{
+    display:flex;align-items:center;gap:10px;text-align:start;
+    border:1.5px solid var(--line);background:var(--surface-2);border-radius:12px;
+    padding:12px 13px;cursor:pointer;transition:.15s;
+  }
+  .choice:hover{border-color:var(--purple-light);background:rgba(147,51,234,0.08)}
+  .choice.selected{border-color:var(--purple-primary);background:rgba(147,51,234,0.16)}
+  .choice .radio{
+    width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line);flex:none;
+    display:grid;place-items:center;transition:.15s;background:var(--surface);
+  }
+  .choice.selected .radio{border-color:var(--purple-primary);background:var(--purple-primary)}
+  .choice.selected .radio::after{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+  .choice .ct b{display:block;font-size:13px;font-weight:800;}
+  html.dark .choice .ct b{color:#fff;}
+  html:not(.dark) .choice .ct b{color:#0f172a;}
+  .choice .ct small{display:block;font-size:11px;color:var(--muted);margin-top:1px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{
+    display:inline-flex;align-items:center;gap:7px;
+    border:1.5px solid var(--line);background:var(--surface-2);color:var(--ink-2);
+    border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:800;
+    cursor:pointer;transition:.15s;
+  }
+  .chip:hover{border-color:var(--purple-light);}
+  html.dark .chip:hover{color:#fff;}
+  html:not(.dark) .chip:hover{color:#0f172a;}
+  .chip .tick{
+    width:15px;height:15px;border-radius:50%;border:1.5px solid var(--line);
+    display:grid;place-items:center;color:transparent;font-size:9px;flex:none;
+  }
+  .chip.selected{background:var(--purple-primary);border-color:var(--purple-primary);color:#fff}
+  .chip.selected .tick{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.6);color:#fff}
+  .segmented{
+    display:inline-flex;gap:4px;background:var(--pureblack);
+    border:1px solid var(--line);border-radius:12px;padding:4px;
+    max-width:100%;flex-wrap:wrap;
+  }
+  .segmented button{
+    border:0;background:transparent;color:var(--muted);
+    border-radius:9px;padding:8px 15px;font-size:12.5px;font-weight:800;
+    cursor:pointer;transition:.15s;white-space:nowrap;
+  }
+  .segmented button:hover{color:var(--purple-light)}
+  .segmented button.selected{background:var(--surface-2);color:var(--purple-light);box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+  .hint{font-size:11.5px;line-height:1.75;color:var(--muted);margin:8px 0 0}
+  .hint.info{
+    background:var(--blue-bg);color:#3b82f6;border:1px solid rgba(59,130,246,0.3);
+    border-radius:10px;padding:9px 11px;
+  }
+  .hint.warn{
+    background:var(--amber-bg);color:#d97706;border:1px solid rgba(245,158,11,0.3);
+    border-radius:10px;padding:9px 11px;
+  }
+  .divider{height:1px;background:var(--line);margin:20px 0 0}
+  details.advanced{
+    margin-top:18px;border:1px solid var(--line);border-radius:12px;
+    background:var(--surface-2);overflow:hidden;
+  }
+  details.advanced summary{
+    list-style:none;cursor:pointer;padding:12px 14px;
+    display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;
+  }
+  html.dark details.advanced summary{color:#fff;}
+  html:not(.dark) details.advanced summary{color:#0f172a;}
+  details.advanced summary::-webkit-details-marker{display:none}
+  details.advanced summary .chev{margin-inline-start:auto;transition:.2s;color:var(--muted)}
+  details.advanced[open] summary .chev{transform:rotate(180deg)}
+  details.advanced .advanced-body{padding:0 14px 6px}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 0}
+  .switch-text b{display:block;font-size:12.5px;font-weight:800;}
+  html.dark .switch-text b{color:#fff;}
+  html:not(.dark) .switch-text b{color:#0f172a;}
+  .switch-text span{display:block;font-size:11px;line-height:1.6;color:var(--muted);margin-top:2px}
+  .toggle{position:relative;width:44px;height:26px;flex:none;cursor:pointer}
+  .toggle input{opacity:0;width:0;height:0;position:absolute}
+  .toggle i{position:absolute;inset:0;background:var(--surface);border:1px solid var(--line);border-radius:999px;transition:.18s}
+  .toggle i::after{
+    content:"";position:absolute;width:20px;height:20px;border-radius:50%;background:var(--muted);
+    top:2px;inset-inline-start:2px;transition:.18s;box-shadow:0 1px 3px rgba(0,0,0,.3);
+  }
+  .toggle input:checked + i{background:var(--purple-primary);border-color:var(--purple-primary)}
+  .toggle input:checked + i::after{transform:translateX(-18px);background:#fff}
+
+  /* ===== Concurrency Control ===== */
+  .concurrency-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;
+  }
+  @media (max-width:600px){
+    .concurrency-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  .concurrency-btn{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;padding:10px 6px;
+    cursor:pointer;transition:.15s;text-align:center;gap:3px;
+  }
+  .concurrency-btn:hover{border-color:var(--purple-light);background:rgba(147,51,234,0.08)}
+  .concurrency-btn.selected{border-color:var(--purple-primary);background:rgba(147,51,234,0.16);box-shadow:0 0 0 2px rgba(147,51,234,0.22)}
+  .concurrency-btn b{font-size:14px;display:flex;align-items:center;gap:4px;}
+  html.dark .concurrency-btn b{color:#fff;}
+  html:not(.dark) .concurrency-btn b{color:#0f172a;}
+  .concurrency-btn.selected b{color:var(--purple-light)}
+  .concurrency-btn span{font-size:10.5px;color:var(--muted);white-space:nowrap}
+  .live-concurrency-bar{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    background:var(--surface-2);border:1px solid var(--line);border-radius:12px;
+    padding:8px 12px;margin-top:12px;
+  }
+  .lcb-label{font-size:12px;font-weight:800;white-space:nowrap;}
+  html.dark .lcb-label{color:#fff;}
+  html:not(.dark) .lcb-label{color:#0f172a;}
+  .lcb-hint{font-size:11px;color:var(--purple-light);font-weight:700;margin-inline-start:auto;white-space:nowrap}
+
+  /* ===== Accounts ===== */
+  .acc-toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:11px}
+  .count-pill{
+    background:rgba(147,51,234,0.16);color:var(--purple-light);
+    border-radius:999px;padding:4px 11px;font-size:11.5px;font-weight:800;
+    white-space:nowrap;border:1px solid rgba(147,51,234,0.35);
+  }
+  .acc-toolbar .hint{margin:0;font-size:11px}
+  .account{
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+    border:1px solid var(--line);border-radius:12px;background:var(--surface-2);
+    padding:8px;margin-bottom:8px;
+  }
+  .account input{
+    width:100%;border:1px solid var(--line);background:var(--pureblack);border-radius:9px;
+    padding:10px 11px;font-size:13px;font-family:inherit;
+    direction:ltr;text-align:left;transition:.15s;
+  }
+  html.dark .account input{color:#fff;}
+  html:not(.dark) .account input{color:#0f172a;}
+  .account input::placeholder{color:var(--muted);direction:rtl;text-align:right}
+  .account input:focus{outline:2px solid rgba(147,51,234,0.45);border-color:var(--purple-primary)}
+  .acc-code{flex:1 1 150px}
+  .pw-wrap{position:relative;flex:1.5 1 200px}
+  .pw-wrap input{padding-left:38px}
+  .pw-wrap .eye{
+    position:absolute;top:50%;left:4px;transform:translateY(-50%);
+    width:32px;height:32px;border:0;background:transparent;color:var(--muted);
+    border-radius:8px;cursor:pointer;display:grid;place-items:center;font-size:14px;
+  }
+  .pw-wrap .eye:hover{background:var(--surface);color:var(--purple-light)}
+  .icon-btn{
+    width:38px;height:38px;flex:none;border-radius:9px;
+    border:1px solid var(--line);background:var(--surface);color:var(--muted);
+    display:grid;place-items:center;cursor:pointer;font-size:14px;transition:.15s;
+  }
+  .icon-btn:hover{background:var(--surface-2);}
+  html.dark .icon-btn:hover{color:#fff;}
+  html:not(.dark) .icon-btn:hover{color:#0f172a;}
+  .icon-btn.danger{color:#ef4444;border-color:rgba(239,68,68,0.3);background:var(--red-bg)}
+  .icon-btn.danger:hover{background:rgba(239,68,68,0.22)}
+  .add-account{
+    width:100%;display:flex;align-items:center;justify-content:center;gap:7px;
+    border:1.5px dashed rgba(147,51,234,0.45);background:rgba(147,51,234,0.08);color:var(--purple-light);
+    border-radius:12px;padding:11px;font-size:13px;font-weight:800;cursor:pointer;transition:.15s;
+  }
+  .add-account:hover{background:rgba(147,51,234,0.16);border-color:var(--purple-primary)}
+
+  /* ===== Alerts ===== */
+  .alert{
+    display:flex;align-items:flex-start;gap:8px;
+    border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.7;
+    margin-top:12px;
+  }
+  .alert.error{background:var(--red-bg);color:#ef4444;border:1px solid rgba(239,68,68,0.3)}
+  .alert.warn{background:var(--amber-bg);color:#d97706;border:1px solid rgba(245,158,11,0.3)}
+  .alert.info{background:var(--blue-bg);color:#3b82f6;border:1px solid rgba(59,130,246,0.3)}
+  .alert[hidden]{display:none}
+
+  /* ===== Review / summary ===== */
+  .summary{
+    border:1px solid var(--line);border-radius:15px;background:var(--surface-2);
+    padding:15px;
+  }
+  .summary-top{display:flex;align-items:flex-start;gap:10px}
+  .summary-title{font-size:15px;font-weight:800;}
+  html.dark .summary-title{color:#fff;}
+  html:not(.dark) .summary-title{color:#0f172a;}
+  .summary-sub{font-size:12px;color:var(--muted);line-height:1.7;margin-top:3px}
+  .summary-top .btn{margin-inline-start:auto;flex:none}
+  .summary-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+  .tag{
+    display:inline-flex;align-items:center;gap:5px;
+    background:var(--surface);border:1px solid var(--line);border-radius:999px;
+    padding:5px 10px;font-size:11.5px;font-weight:700;color:var(--ink-2);
+  }
+  .tag b{color:var(--purple-light);font-weight:800}
+  .progress-card{
+    margin-top:12px;border:1px solid var(--line);border-radius:15px;
+    background:var(--surface-2);padding:14px;
+  }
+  .progress-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .progress-top .lbl{font-size:12.5px;font-weight:800;}
+  html.dark .progress-top .lbl{color:#fff;}
+  html:not(.dark) .progress-top .lbl{color:#0f172a;}
+  .progress-top .pct{font-size:12px;font-weight:800;color:var(--purple-light);font-variant-numeric:tabular-nums}
+  .bar{height:9px;background:var(--pureblack);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .bar > i{
+    display:block;height:100%;width:0;border-radius:inherit;
+    background:linear-gradient(90deg,var(--purple-primary),var(--purple-light));
+    transition:width .3s ease;
+  }
+  .progress-foot{display:flex;justify-content:space-between;gap:8px;margin-top:7px;font-size:11px;color:var(--muted)}
+
+  .results-head{display:flex;align-items:center;gap:8px;margin:20px 0 9px}
+  .results-head h3{font-size:13.5px;margin:0;font-weight:800;}
+  html.dark .results-head h3{color:#fff;}
+  html:not(.dark) .results-head h3{color:#0f172a;}
+  .results-head span{font-size:11px;color:var(--muted);margin-inline-start:auto}
+  .results{display:grid;gap:9px}
+  .result{border:1px solid var(--line);border-radius:14px;background:var(--surface-2);overflow:hidden}
+  .result-head{
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    padding:11px 13px;background:var(--surface);border-bottom:1px solid var(--line);
+  }
+  .r-id{min-width:0}
+  .r-code{font-size:13px;font-weight:800;direction:ltr;text-align:right;font-variant-numeric:tabular-nums;}
+  html.dark .r-code{color:#fff;}
+  html:not(.dark) .r-code{color:#0f172a;}
+  .r-meta{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.5}
+  .status{
+    margin-inline-start:auto;font-size:11px;font-weight:800;border-radius:999px;
+    padding:4px 10px;white-space:nowrap;
+  }
+  .status.run{background:var(--blue-bg);color:#3b82f6}
+  .status.ok{background:rgba(16,185,129,0.16);color:#10b981}
+  .status.fail{background:var(--red-bg);color:#ef4444}
+  .status.stop{background:var(--surface);color:var(--muted)}
+  .result-body{padding:11px 13px}
+  .r-msg{font-size:12px;line-height:1.7;color:var(--ink-2);margin:0 0 9px}
+  .r-msg.ok{color:#10b981;font-weight:700}
+  .r-msg.fail{color:#ef4444;font-weight:700}
+  .r-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+  .r-bar-row .bar{flex:1;height:7px}
+  .r-title{font-size:10.5px;color:var(--muted);white-space:nowrap;max-width:45%;overflow:hidden;text-overflow:ellipsis}
+  .r-count{font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .log-toggle{
+    display:inline-flex;align-items:center;gap:6px;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink-2);
+    border-radius:9px;padding:7px 10px;font-size:11.5px;font-weight:700;
+    cursor:pointer;transition:.15s;
+  }
+  .log-toggle:hover{background:var(--surface-2);border-color:var(--purple-light);}
+  html.dark .log-toggle:hover{color:#fff;}
+  html:not(.dark) .log-toggle:hover{color:#0f172a;}
+  .log-toggle .chev{transition:transform .2s;font-size:9px;color:var(--muted)}
+  .log-toggle[aria-expanded="true"] .chev{transform:rotate(180deg)}
+  .log-wrap{display:none;margin-top:8px}
+  .log-wrap.open{display:block}
+  .log{
+    background:#030305;color:#d8b4fe;border-radius:10px;
+    padding:9px 10px;font-family:Consolas,"Courier New",monospace;
+    font-size:11px;line-height:1.75;max-height:180px;overflow:auto;
+    direction:rtl;text-align:right;border:1px solid var(--line);
+  }
+  .log div{white-space:pre-wrap;overflow-wrap:anywhere}
+  .log .t{color:#a78bfa;font-size:10px;margin-inline-end:5px}
+  .log .ok{color:#34d399}
+  .log .err{color:#f87171}
+  .log .wrn{color:#fcd34d}
+  .log .sys{color:#c084fc}
+
+  /* ===== Empty / bank ===== */
+  .empty{
+    border:1.5px dashed var(--line);border-radius:14px;background:var(--surface-2);
+    text-align:center;padding:26px 16px;color:var(--muted);font-size:12.5px;line-height:1.8;
+    margin-top:12px;
+  }
+  .empty .big{display:block;font-size:26px;margin-bottom:6px}
+  .empty b{font-size:13.5px;}
+  html.dark .empty b{color:#fff;}
+  html:not(.dark) .empty b{color:#0f172a;}
+  details.bank{
+    margin-top:16px;border:1px solid var(--line);border-radius:14px;
+    background:var(--surface-2);overflow:hidden;
+  }
+  details.bank summary{
+    list-style:none;cursor:pointer;padding:12px 14px;
+    display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;
+  }
+  html.dark details.bank summary{color:#fff;}
+  html:not(.dark) details.bank summary{color:#0f172a;}
+  details.bank summary::-webkit-details-marker{display:none}
+  details.bank summary .muted{margin-inline-start:auto;font-size:11px;color:var(--muted);font-weight:600}
+  .bank-body{padding:0 12px 12px;display:grid;gap:7px}
+  .bank-row{
+    display:flex;align-items:center;gap:9px;
+    background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 11px;
+    font-size:11.5px;
+  }
+  .bank-row .grade{
+    width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+    font-weight:900;font-size:11px;flex:none;
+  }
+  .grade.ss{background:rgba(16,185,129,0.2);color:#10b981}
+  .grade.s{background:var(--blue-bg);color:#3b82f6}
+  .grade.a{background:var(--amber-bg);color:#d97706}
+  .bank-row .bk-main{min-width:0}
+  .bank-row .bk-main b{display:block;font-size:12px;}
+  html.dark .bank-row .bk-main b{color:#fff;}
+  html:not(.dark) .bank-row .bk-main b{color:#0f172a;}
+  .bank-row .bk-main small{display:block;color:var(--muted);font-size:10.5px;margin-top:1px}
+  .bank-row .bk-score{margin-inline-start:auto;font-weight:800;color:var(--purple-light);white-space:nowrap}
+
+  /* ===== Sticky action bar ===== */
+  .actionbar{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:var(--pureblack);
+    opacity:0.96;
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);
+    padding-bottom:env(safe-area-inset-bottom);
+    box-shadow:0 -8px 30px rgba(0,0,0,.2);
+  }
+  .actionbar-inner{
+    max-width:var(--max);margin:0 auto;padding:12px 20px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .ab-side{display:flex;align-items:center;gap:8px;flex:none}
+  .ab-meta{
+    flex:1;min-width:0;text-align:center;font-size:11.5px;color:var(--muted);
+    line-height:1.5;
+  }
+  html.dark .ab-meta b{color:#fff;}
+  html:not(.dark) .ab-meta b{color:#0f172a;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:7px;
+    border:0;border-radius:11px;padding:11px 18px;
+    font-size:13px;font-weight:800;cursor:pointer;transition:.15s;
+    white-space:nowrap;
+  }
+  .btn.primary{
+    background:var(--purple-primary);color:#fff;
+    box-shadow:0 6px 20px rgba(147,51,234,0.4);
+  }
+  .btn.primary:hover{background:var(--purple-light)}
+  .btn.primary:disabled{background:rgba(147,51,234,0.28);box-shadow:none;cursor:not-allowed;color:var(--muted)}
+  .btn.secondary{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+  .btn.secondary:hover{background:var(--surface-2);}
+  html.dark .btn.secondary:hover{color:#fff;}
+  html:not(.dark) .btn.secondary:hover{color:#0f172a;}
+  .btn.danger{background:var(--red);color:#fff;box-shadow:0 7px 18px rgba(239,68,68,0.3)}
+  .btn.danger:hover{background:#dc2626}
+  .btn.ghost{background:transparent;color:var(--purple-light);padding:8px 10px}
+  .btn.ghost:hover{background:rgba(147,51,234,0.12)}
+  .btn[hidden]{display:none}
+
+  /* ===== Footer ===== */
+  .foot{
+    max-width:var(--max);margin:18px auto 0;padding:0 20px;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    color:var(--muted);font-size:11.5px;text-align:center;
+  }
+  .foot img{width:24px;height:24px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
+
+  /* ===== Toast ===== */
+  .toast{
+    position:fixed;top:14px;left:50%;transform:translate(-50%,-14px);
+    background:var(--surface);color:var(--ink);border:1px solid rgba(147,51,234,0.45);border-radius:10px;padding:9px 14px;
+    font-size:12px;font-weight:700;z-index:100;opacity:0;pointer-events:none;
+    transition:.2s;box-shadow:var(--shadow);max-width:calc(100vw - 32px);
+  }
+  html.dark .toast{color:#fff;}
+  html:not(.dark) .toast{color:#0f172a;}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* ===== Responsive ===== */
+  @media (max-width:720px){
+    .app-header{padding:14px 14px 4px}
+    .brand-avatar{width:38px;height:38px;border-radius:11px}
+    .brand h1{font-size:15.5px}
+    .brand p{font-size:10.5px}
+    .mock-pill{display:none}
+    .install-btn, .theme-btn{padding:8px 10px}
+    .stepper{padding:0 10px;gap:2px}
+    .step{flex-direction:column;gap:3px;padding:7px 2px}
+    .step .lbl{font-size:10px}
+    .step .dot{width:25px;height:25px;font-size:11px}
+    .wrap{padding:8px 12px 128px}
+    .panel{padding:16px;border-radius:17px}
+    .panel-head h2{font-size:17px}
+    .panel-head p{font-size:12px}
+    .type-grid{grid-template-columns:1fr;gap:9px}
+    .type-card{padding:13px 13px 13px 36px}
+    .type-icon{width:40px;height:40px;font-size:19px}
+    .type-game{display:none}
+    .alert.game-mobile-note{display:flex}
+    .choice-row{grid-template-columns:1fr}
+    .account{padding:7px}
+    .acc-code{flex:1 1 100%}
+    .pw-wrap{flex:1 1 100%}
+    .actionbar-inner{padding:10px 12px;gap:8px}
+    .ab-meta{display:none}
+    .btn{padding:11px 15px;font-size:12.5px}
+    .summary-top{flex-wrap:wrap}
+    .summary-top .btn{margin-inline-start:0;padding-inline:0}
+    .r-title{max-width:40%}
+  }
+  @media (max-width:380px){
+    .brand p{display:none}
+    .btn{padding:10px 13px;font-size:12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+    html{scroll-behavior:auto}
+  }
+  /* ===== Live Background Jobs Banner ===== */
+  .live-jobs-container{max-width:var(--max);margin:4px auto 8px;padding:0 20px;}
+  .live-jobs-pill{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    background:linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(88, 28, 135, 0.4));
+    border:1px solid rgba(168, 85, 247, 0.5);
+    border-radius:12px;padding:10px 16px;
+    cursor:pointer;font-size:13px;font-weight:700;color:var(--purple-light);
+    box-shadow:0 4px 15px rgba(147, 51, 234, 0.22);
+    transition:all .2s ease;
+  }
+  .live-jobs-pill:hover{
+    background:linear-gradient(135deg, rgba(147, 51, 234, 0.3), rgba(88, 28, 135, 0.6));
+    border-color:rgba(168, 85, 247, 0.8);
+    transform:translateY(-1px);
+    box-shadow:0 6px 20px rgba(147, 51, 234, 0.35);
+  }
+  .live-pulse{
+    width:10px;height:10px;background:var(--purple-light);border-radius:50%;
+    box-shadow:0 0 10px var(--purple-light);animation:pulseLive 1.4s infinite;flex-shrink:0;
+  }
+  @keyframes pulseLive{
+    0%,100%{transform:scale(1);opacity:1}
+    50%{transform:scale(1.35);opacity:.6}
+  }
+  .live-act{
+    background:rgba(147, 51, 234, 0.3);padding:4px 12px;
+    border-radius:8px;font-size:12px;color:#fff;display:flex;align-items:center;gap:4px;
+  }
+  .stop-single-btn{
+    background:rgba(239, 68, 68, 0.15);color:#ef4444;border:1px solid rgba(239, 68, 68, 0.3);
+    border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer;transition:.15s;
+    margin-inline-start:auto;
+  }
+  .stop-single-btn:hover{background:rgba(239, 68, 68, 0.3);border-color:#ef4444;}
+</style>
+<script>
+  // تفعيل الثيم المحفوظ مسبقاً فور التحميل لمنع الوميض
+  (function(){
+    var savedTheme = localStorage.getItem("fox_theme");
+    if(savedTheme === "light"){
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <img class="brand-avatar" src="ahmad_photo.png" alt="" onerror="this.style.visibility='hidden'">
+    <div>
+      <h1 dir="ltr">FOX QUREO</h1>
+      <p>الثقافة المالية · Qureo · لعبة الأسهم</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <span class="mock-pill"><i></i> نظامي</span>
+    <button class="theme-btn" type="button" id="themeToggleBtn" aria-label="تبديل الوضع النهاري والليلي">🌞</button>
+    <button class="install-btn" type="button" id="installBtn" hidden>📲 <span class="hide-sm">تثبيت</span></button>
+  </div>
+</header>
+
+<nav class="stepper" aria-label="خطوات الاستخدام">
+  <button class="step active" type="button" data-step="1" aria-current="step">
+    <span class="dot"><span class="num">1</span></span><span class="lbl">النوع</span>
+  </button>
+  <button class="step" type="button" data-step="2">
+    <span class="dot"><span class="num">2</span></span><span class="lbl">الإعدادات</span>
+  </button>
+  <button class="step" type="button" data-step="3">
+    <span class="dot"><span class="num">3</span></span><span class="lbl">الحسابات</span>
+  </button>
+  <button class="step" type="button" data-step="4">
+    <span class="dot"><span class="num">4</span></span><span class="lbl">التشغيل</span>
+  </button>
+</nav>
+
+<div class="live-jobs-container">
+  <div id="liveJobsPill" class="live-jobs-pill" style="display:none;" onclick="showLiveJobs()">
+    <span class="live-pulse"></span>
+    <span id="liveJobsText">⚡ يوجد (1) حساب قيد الحل في الخلفية حالياً</span>
+    <span class="live-act">👁️ عرض الشاشة والتقدم ←</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- STEP 1 -->
+  <section class="panel active" data-panel="1" aria-labelledby="p1title">
+    <div class="panel-head">
+      <span class="kicker">الخطوة 1</span>
+      <h2 id="p1title">اختر نوع الحل</h2>
+      <p>حدّد الخدمة اللي عايز تشغّلها. تقدر تغيّر اختيارك في أي وقت قبل البدء.</p>
+    </div>
+
+    <div class="type-grid" id="typeGrid">
+      <button class="type-card type-second" type="button" data-type="qureo2">
+        <span class="type-icon">🆕</span>
+        <span class="type-body">
+          <b>الصف الأول الثانوي — JavaScript</b>
+          <small>JavaScript فقط — عربي أو لغات.</small>
+        </span>
+        <span class="type-check">✓</span>
+      </button>
+
+      <button class="type-card" type="button" data-type="spx">
+        <span class="type-icon">💰</span>
+        <span class="type-body">
+          <b>الثقافة المالية</b>
+          <small>حل كامل للمنهج — عربي أو لغات</small>
+        </span>
+        <span class="type-check">✓</span>
+      </button>
+
+      <button class="type-card" type="button" data-type="qureo">
+        <span class="type-icon">🧩</span>
+        <span class="type-body">
+          <b>Qureo</b>
+          <small>Python و/أو JavaScript — حل المسارات القديم</small>
+        </span>
+        <span class="type-check">✓</span>
+      </button>
+
+      <button class="type-card" type="button" data-type="both">
+        <span class="type-icon">⚡</span>
+        <span class="type-body">
+          <b>الاتنين معًا</b>
+          <small>الثقافة المالية + Qureo في نفس العملية</small>
+        </span>
+        <span class="type-check">✓</span>
+      </button>
+
+      <button class="type-card type-game" type="button" data-type="game">
+        <span class="type-icon">🎮</span>
+        <span class="type-body">
+          <b>لعبة الأسهم</b>
+          <small>استراتيجية 30 يومًا — على الكمبيوتر فقط</small>
+        </span>
+        <span class="type-check">✓</span>
+      </button>
+    </div>
+
+    <div class="alert info game-mobile-note">
+      🎮 لعبة الأسهم متاحة على الكمبيوتر فقط. افتح الأداة من جهاز الكمبيوتر عشان تلاقيها.
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="panel" data-panel="2" aria-labelledby="p2title">
+    <div class="panel-head">
+      <span class="kicker">الخطوة 2</span>
+      <h2 id="p2title">الإعدادات</h2>
+      <p>اضبط المادة والمسارات واللغة. الخيارات بتتغير حسب النوع اللي اخترته.</p>
+    </div>
+    <div id="step2"></div>
+    <div class="alert error" id="step2Alert" role="alert" hidden></div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="panel" data-panel="3" aria-labelledby="p3title">
+    <div class="panel-head">
+      <span class="kicker">الخطوة 3</span>
+      <h2 id="p3title">الحسابات</h2>
+      <p>أضف كود وكلمة مرور لكل حساب. تقدر تلصق قائمة كاملة بصيغة <b dir="ltr">كود : باسورد</b> في أول خانة.</p>
+    </div>
+
+    <div class="acc-toolbar">
+      <span class="count-pill" id="accCountPill">3 أكواد</span>
+      <span class="hint">كل حساب بيتشغّل لوحده — والأكواد مش بتتحفظ في المتصفح.</span>
+    </div>
+
+    <div id="accounts"></div>
+    <button class="add-account" type="button" data-action="add-account">＋ إضافة حساب</button>
+    <div class="alert error" id="accAlert" role="alert" hidden></div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="panel" data-panel="4" aria-labelledby="p4title">
+    <div class="panel-head">
+      <span class="kicker">الخطوة 4</span>
+      <h2 id="p4title">المراجعة والتشغيل</h2>
+      <p>راجع الاختيارات، وبعدين ابدأ من الشريط السفلي. السجل مطوي جوه كل حساب — اضغط عليه عشان يفتح.</p>
+    </div>
+    <div id="review"></div>
+  </section>
+
+  <footer class="foot">
+    <img src="ahmed.png" alt="" onerror="this.style.visibility='hidden'">
+    <span>𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐝 𝐛𝐲 <b>𝑭𝑶𝑿</b></span>
+  </footer>
+</main>
+
+<div class="actionbar">
+  <div class="actionbar-inner">
+    <div class="ab-side" id="abPrimary"></div>
+    <div class="ab-meta" id="abMeta">الخطوة 1 من 4</div>
+    <div class="ab-side">
+      <button class="btn secondary" type="button" id="backBtn" data-action="back" hidden>→ السابق</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var state = {
+    step: 1,
+    maxStep: 1,
+    type: null,
+    subject: "7",
+    courses: ["Python", "JavaScript"],
+    lang: "ar",
+    gameNew: true,
+    bankOpen: false,
+    turbo: true,
+    accounts: [{ code: "", password: "" }, { code: "", password: "" }, { code: "", password: "" }],
+    running: false,
+    serverRunningCount: 0,
+    concurrency: Number(localStorage.getItem("preferred_concurrency")) || 4,
+    activeWorkers: 0,
+    finished: false,
+    results: [],
+    openLogs: {},
+    timer: null
+  };
+
+  var $ = function(sel, root){ return (root || document).querySelector(sel); };
+  var $$ = function(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+
+  // إدارة زر الثيم
+  function updateThemeButton(){
+    var btn = $("#themeToggleBtn");
+    if (!btn) return;
+    var isDark = document.documentElement.classList.contains("dark");
+    btn.textContent = isDark ? "🌞" : "🌙";
+  }
+
+  var themeBtn = $("#themeToggleBtn");
+  if (themeBtn){
+    themeBtn.addEventListener("click", function(){
+      var isDark = document.documentElement.classList.toggle("dark");
+      localStorage.setItem("fox_theme", isDark ? "dark" : "light");
+      updateThemeButton();
+      toast(isDark ? "تم تفعيل الوضع الليلي 🌙" : "تم تفعيل الوضع النهاري 🌞");
+    });
+  }
+
+  function esc(v){
+    return String(v == null ? "" : v)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
+  function now(){
+    var d = new Date();
+    var p = function(n){ return String(n).padStart(2, "0"); };
+    return p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds());
+  }
+
+  function typeLabel(t){
+    if (t === "spx") return "الثقافة المالية";
+    if (t === "qureo") return "Qureo";
+    if (t === "both") return "الثقافة المالية + Qureo";
+    if (t === "game") return "لعبة الأسهم";
+    if (t === "qureo2") return "Qureo — الخيار الثاني";
+    return "—";
+  }
+
+  function subjectLabel(){
+    return state.subject === "7" ? "عربي — الثقافة المالية" : "لغات — Financial Literacy";
+  }
+
+  function sortedCourses(){
+    return ["Python", "JavaScript"].filter(function(c){ return state.courses.indexOf(c) !== -1; });
+  }
+
+  function coursesLabel(){
+    var c = sortedCourses();
+    return c.length ? c.join(" + ") : "لم يتم اختيار مسار";
+  }
+
+  function langLabel(){
+    if (state.lang === "ar") return "عربي";
+    if (state.lang === "en") return "لغات";
+    return "تلقائي";
+  }
+
+  function jobsPerAccount(){
+    return state.type === "both" ? 2 : 1;
+  }
+
+  function completeAccounts(){
+    return state.accounts.filter(function(a){ return a.code.trim() && a.password; });
+  }
+
+  function totalJobs(){
+    return completeAccounts().length * jobsPerAccount();
+  }
+
+  function selectionDetail(){
+    if (state.type === "spx") return subjectLabel();
+    if (state.type === "qureo") {
+      return "Qureo — " + coursesLabel();
+    }
+    if (state.type === "both") {
+      return (state.subject === "7" ? "عربي" : "لغات") + " + Qureo (" + coursesLabel() + ")";
+    }
+    if (state.type === "game") return "لعبة الأسهم — جولة جديدة: " + (state.gameNew ? "نعم" : "لا");
+    if (state.type === "qureo2") return "JavaScript فقط — " + langLabel();
+    return "—";
+  }
+
+  /* ===== Rendering ===== */
+  function showLiveJobs(){
+    state.maxStep = 4;
+    go(4);
+  }
+  window.showLiveJobs = showLiveJobs;
+
+  function renderLiveBanner(){
+    var pill = $("#liveJobsPill");
+    var txt = $("#liveJobsText");
+    if (!pill) return;
+    var cnt = state.serverRunningCount || 0;
+    if (cnt > 0 && state.step !== 4){
+      pill.style.display = "flex";
+      if (txt) txt.textContent = "⚡ يوجد (" + cnt + ") حساب قيد الحل في الخلفية حالياً";
+    } else {
+      pill.style.display = "none";
+    }
+  }
+
+  function renderAll(){
+    updateThemeButton();
+    renderStepper();
+    renderPanels();
+    renderTypeCards();
+    renderStep2();
+    renderAccounts();
+    renderReview();
+    renderActionBar();
+    renderLiveBanner();
+  }
+
+  function renderStepper(){
+    $$(".step").forEach(function(btn){
+      var n = Number(btn.getAttribute("data-step"));
+      var locked = n > state.maxStep;
+      btn.classList.toggle("active", n === state.step);
+      btn.classList.toggle("done", n < state.step);
+      btn.classList.toggle("locked", locked && n !== state.step);
+      btn.disabled = locked && n !== state.step;
+      if (n === state.step) btn.setAttribute("aria-current", "step");
+      else btn.removeAttribute("aria-current");
+    });
+  }
+
+  function renderPanels(){
+    $$(".panel").forEach(function(p){
+      p.classList.toggle("active", Number(p.getAttribute("data-panel")) === state.step);
+    });
+  }
+
+  function renderTypeCards(){
+    $$(".type-card").forEach(function(card){
+      card.classList.toggle("selected", card.getAttribute("data-type") === state.type);
+      card.setAttribute("aria-pressed", card.getAttribute("data-type") === state.type ? "true" : "false");
+    });
+  }
+
+  function renderStep2(){
+    var host = $("#step2");
+    if (!state.type){
+      host.innerHTML = '<div class="empty"><span class="big">☝️</span><b>اختر النوع الأول</b><br>ارجع للخطوة 1 وحدّد الخدمة المطلوبة.</div>';
+      return;
+    }
+
+    var html = "";
+
+    if (state.type === "spx" || state.type === "both"){
+      html += '<div class="settings-block">' +
+        '<div class="block-title"><span class="n">1</span> مادة الثقافة المالية</div>' +
+        '<div class="choice-row">' +
+          '<button type="button" class="choice ' + (state.subject === "7" ? "selected" : "") + '" data-subject="7">' +
+            '<span class="radio"></span><span class="ct"><b>عربي</b><small>الثقافة المالية</small></span>' +
+          '</button>' +
+          '<button type="button" class="choice ' + (state.subject === "3" ? "selected" : "") + '" data-subject="3">' +
+            '<span class="radio"></span><span class="ct"><b>لغات</b><small>Financial Literacy</small></span>' +
+          '</button>' +
+        '</div></div>';
+    }
+
+    if (state.type === "qureo" || state.type === "both"){
+      html += '<div class="settings-block">' +
+        '<div class="block-title"><span class="n">' + (state.type === "both" ? "2" : "1") + '</span> مسارات Qureo</div>' +
+        '<div class="chips">' +
+          courseChip("Python") +
+          courseChip("JavaScript") +
+        '</div>' +
+        '<p class="hint">اختر مسار واحد أو الاتنين. كل مسار بيتحل بترتيب فصوله.</p>';
+
+      html += '<p class="hint info">لو محتاج JavaScript بالعربي أو اللغات، اختار «الخيار الثاني» من الخطوة 1. الوضع ده بيفضل زي القديم.</p>';
+      html += '</div>';
+    }
+
+    if (state.type === "qureo2"){
+      html += '<div class="settings-block">' +
+        '<div class="block-title"><span class="n">1</span> لغة الحساب</div>' +
+        '<div class="choice-row">' +
+          '<button type="button" class="choice ' + (state.lang === "ar" ? "selected" : "") + '" data-lang="ar">' +
+            '<span class="radio"></span><span class="ct"><b>عربي</b><small>JavaScript (عربي)</small></span>' +
+          '</button>' +
+          '<button type="button" class="choice ' + (state.lang === "en" ? "selected" : "") + '" data-lang="en">' +
+            '<span class="radio"></span><span class="ct"><b>لغات</b><small>JavaScript (English)</small></span>' +
+          '</button>' +
+        '</div>' +
+        '<p class="hint">الخيار الثاني بيشتغل على مسار JavaScript المستقل: <code>javascript_ar</code> للحساب العربي و<code>javascript_en</code> لحساب اللغات.</p>' +
+      '</div>';
+    }
+
+    if (state.type === "game"){
+      html += '<div class="settings-block">' +
+        '<div class="switch">' +
+          '<div class="switch-text"><b>بدء جولة جديدة</b><span>تلغي الجولة الحالية وتبدأ من اليوم الأول.</span></div>' +
+          '<label class="toggle"><input type="checkbox" id="gameNew" ' + (state.gameNew ? "checked" : "") + '><i></i></label>' +
+        '</div>' +
+        '<p class="hint">البوت بيلعب 30 يومًا ويحفظ النتيجة في بنك نتائج اللعبة.</p>' +
+      '</div>';
+    }
+
+    html += '<div class="settings-block">' +
+      '<div class="block-title"><span class="n">⚡</span> سرعة الحل المتزامن (عدد الحسابات معاً)</div>' +
+      '<div class="concurrency-grid">' +
+        '<button type="button" class="concurrency-btn ' + (state.concurrency === 2 ? 'selected' : '') + '" data-concurrency="2">' +
+          '<b>2 🐢</b><span>هادئ (نت ضعيف)</span>' +
+        '</button>' +
+        '<button type="button" class="concurrency-btn ' + (state.concurrency === 4 ? 'selected' : '') + '" data-concurrency="4">' +
+          '<b>4 ⚡</b><span>متوازن (موصى به)</span>' +
+        '</button>' +
+        '<button type="button" class="concurrency-btn ' + (state.concurrency === 6 ? 'selected' : '') + '" data-concurrency="6">' +
+          '<b>6 🚀</b><span>سريع (نت قوي)</span>' +
+        '</button>' +
+        '<button type="button" class="concurrency-btn ' + (state.concurrency === 8 ? 'selected' : '') + '" data-concurrency="8">' +
+          '<b>8 🌪️</b><span>أقصى سرعة</span>' +
+        '</button>' +
+      '</div>' +
+      '<p class="hint">يحدد عدد الطلاب اللي بيتحل ليهم في نفس اللحظة بالتوازي. باقي الحسابات بتنتظر دورها تلقائياً.</p>' +
+    '</div>';
+
+    if (state.type !== "game"){
+      html += '<details class="advanced">' +
+        '<summary>⚙️ خيارات متقدمة <span class="chev">▾</span></summary>' +
+        '<div class="advanced-body">' +
+          '<div class="switch">' +
+            '<div class="switch-text"><b>وضع السرعة القصوى</b><span>جلسة HTTP سريعة بدون متصفح — مفعّل افتراضيًا.</span></div>' +
+            '<label class="toggle"><input type="checkbox" id="turbo" ' + (state.turbo ? "checked" : "") + '><i></i></label>' +
+          '</div>' +
+        '</div>' +
+      '</details>';
+    }
+
+    host.innerHTML = html;
+  }
+
+  function courseChip(c){
+    var on = state.courses.indexOf(c) !== -1;
+    return '<button type="button" class="chip ' + (on ? "selected" : "") + '" data-course="' + c + '" aria-pressed="' + on + '">' +
+      '<span class="tick">✓</span>' + c + '</button>';
+  }
+
+  function renderAccounts(){
+    var host = $("#accounts");
+    if (!host) return;
+    host.innerHTML = state.accounts.map(function(a, i){
+      return '<div class="account" data-i="' + i + '">' +
+        '<input class="acc-code" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" ' +
+          'value="' + esc(a.code) + '" placeholder="كود الطالب" aria-label="كود الطالب ' + (i + 1) + '" dir="ltr">' +
+        '<div class="pw-wrap">' +
+          '<input class="acc-pw" type="password" autocomplete="off" spellcheck="false" ' +
+            'value="' + esc(a.password) + '" placeholder="كلمة المرور" aria-label="كلمة المرور ' + (i + 1) + '" dir="ltr">' +
+          '<button type="button" class="eye" data-action="eye" aria-label="إظهار كلمة المرور">👁</button>' +
+        '</div>' +
+        '<button type="button" class="icon-btn danger" data-action="del-account" aria-label="حذف الحساب">✕</button>' +
+      '</div>';
+    }).join("");
+
+    var count = state.accounts.length;
+    var pill = $("#accCountPill");
+    if (pill) pill.textContent = count + (count === 1 ? " كود" : " أكواد");
+  }
+
+  function progressSnapshot(){
+    if (!state.results.length){
+      return { pct: 0, done: 0, total: 0, running: 0, label: "لم تبدأ العملية بعد", foot: "جاهز للبدء" };
+    }
+    var done = 0, total = 0, running = 0;
+    state.results.forEach(function(r){
+      done += r.done;
+      total += r.total;
+      if (r.status === "run") running += 1;
+    });
+    var pct = total ? Math.round(done / total * 100) : 0;
+    if (state.running){
+      return { pct: pct, done: done, total: total, running: running, label: "جاري التشغيل…", foot: running + " عملية شغالة" };
+    }
+    var ok = state.results.filter(function(r){ return r.status === "ok"; }).length;
+    var failed = state.results.filter(function(r){ return r.status === "fail"; }).length;
+    var stopped = state.results.filter(function(r){ return r.status === "stop"; }).length;
+    var label = "انتهت العملية";
+    if (stopped) label = "تم الإيقاف";
+    var foot = ok + " ناجحة";
+    if (failed) foot += " · " + failed + " فاشلة";
+    if (stopped) foot += " · " + stopped + " متوقفة";
+    return { pct: pct, done: done, total: total, running: 0, label: label, foot: foot };
+  }
+
+  function statusInfo(r){
+    if (r.status === "ok") return { cls: "ok", txt: "اكتمل" };
+    if (r.status === "fail") return { cls: "fail", txt: "فشل" };
+    if (r.status === "stop") return { cls: "stop", txt: "متوقف" };
+    return { cls: "run", txt: "جاري الحل" };
+  }
+
+  function logHtml(lines){
+    return lines.map(function(l){
+      var cls = l.level === "ok" ? "ok" : l.level === "err" ? "err" : l.level === "wrn" ? "wrn" : l.level === "sys" ? "sys" : "";
+      return '<div class="' + cls + '"><span class="t">' + esc(l.t) + '</span>' + esc(l.msg) + '</div>';
+    }).join("");
+  }
+
+  function renderResults(){
+    var host = $("#results");
+    if (!host) return;
+    if (!state.results.length){
+      host.innerHTML = '<div class="empty"><span class="big">🚀</span><b>جاهز للبدء</b><br>اضغط «ابدأ الحل» من الشريط السفلي، وهتلاقي كل حساب هنا ببطاقته وسجله.</div>';
+      return;
+    }
+
+    var keepScroll = {};
+    Object.keys(state.openLogs).forEach(function(k){
+      if (!state.openLogs[k]) return;
+      var box = host.querySelector('[data-log="' + k + '"] .log');
+      if (!box) return;
+      keepScroll[k] = {
+        top: box.scrollTop,
+        atBottom: box.scrollHeight - box.scrollTop - box.clientHeight < 24
+      };
+    });
+
+    host.innerHTML = state.results.map(function(r, i){
+      var st = statusInfo(r);
+      var pct = r.total ? Math.round(r.done / r.total * 100) : 0;
+      var open = !!state.openLogs[i];
+      var msgCls = r.status === "ok" ? "ok" : r.status === "fail" ? "fail" : "";
+      var singleStop = r.status === "run" ? '<button type="button" class="stop-single-btn" data-action="stop-single" data-code="' + esc(r.code) + '">إيقاف ✕</button>' : '';
+      return '<article class="result">' +
+        '<div class="result-head">' +
+          '<div class="r-id"><div class="r-code">' + esc(r.code) + '</div><div class="r-meta">' + esc(r.detail) + '</div></div>' +
+          singleStop +
+          '<span class="status ' + st.cls + '" style="margin-inline-start:8px">' + st.txt + '</span>' +
+        '</div>' +
+        '<div class="result-body">' +
+          '<p class="r-msg ' + msgCls + '">' + esc(r.message || r.phase || "في الانتظار…") + '</p>' +
+          '<div class="r-bar-row">' +
+            '<span class="r-title">' + esc(r.title || "—") + '</span>' +
+            '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
+            '<span class="r-count">' + r.done + '/' + r.total + '</span>' +
+          '</div>' +
+          '<button type="button" class="log-toggle" data-action="toggle-log" data-i="' + i + '" aria-expanded="' + open + '">' +
+            (open ? "إخفاء السجل" : "عرض السجل") + ' <span class="chev">▼</span>' +
+          '</button>' +
+          '<div class="log-wrap ' + (open ? "open" : "") + '" data-log="' + i + '">' +
+            '<div class="log">' + logHtml(r.lines) + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+    }).join("");
+
+    Object.keys(state.openLogs).forEach(function(k){
+      if (!state.openLogs[k]) return;
+      var box = host.querySelector('[data-log="' + k + '"] .log');
+      if (!box) return;
+      var keep = keepScroll[k];
+      if (keep && !keep.atBottom) box.scrollTop = keep.top;
+      else box.scrollTop = box.scrollHeight;
+    });
+  }
+
+  function renderReview(){
+    var host = $("#review");
+    if (!host) return;
+    if (!state.type){
+      host.innerHTML = '<div class="empty"><span class="big">☝️</span><b>لسه مفيش نوع</b><br>ارجع للخطوة 1 واختار الخدمة.</div>';
+      return;
+    }
+
+    var prog = progressSnapshot();
+    var n = completeAccounts().length;
+    var jobs = totalJobs();
+    var over = jobs > 20;
+
+    var html = '<div class="summary">' +
+      '<div class="summary-top">' +
+        '<div><div class="summary-title">' + esc(typeLabel(state.type)) + '</div>' +
+        '<div class="summary-sub">' + esc(selectionDetail()) + '</div></div>' +
+        '<button type="button" class="btn ghost" data-action="edit-settings">تعديل</button>' +
+      '</div>' +
+      '<div class="summary-chips">' +
+        '<span class="tag">👤 <b>' + n + '</b> حساب</span>' +
+        '<span class="tag">⚙️ <b>' + jobs + '</b> عملية</span>' +
+        '<span class="tag">⚡ <b>' + (state.concurrency || 4) + '</b> بالتوازي</span>' +
+        (state.type === "game"
+          ? '<span class="tag">' + (state.gameNew ? "🆕 جولة جديدة" : "♻️ استكمال الجولة") + '</span>'
+          : '<span class="tag">' + (state.turbo ? "🚀 سرعة قصوى" : "🐢 الوضع العادي") + '</span>') +
+      '</div>';
+
+    if (over){
+      html += '<div class="alert warn">⚠️ الحد الأقصى 20 عملية في المرة. قلّل الحسابات أو غيّر النوع قبل البدء.</div>';
+    }
+    html += '<div class="alert error" id="runAlert" role="alert" hidden></div>';
+    html += '</div>';
+
+    html += '<div class="live-concurrency-bar">' +
+      '<span class="lcb-label">⚡ سرعة الحل المتزامن:</span>' +
+      '<div class="segmented">' +
+        '<button type="button" class="' + (state.concurrency === 2 ? 'selected' : '') + '" data-live-c="2">2 عادي</button>' +
+        '<button type="button" class="' + (state.concurrency === 4 ? 'selected' : '') + '" data-live-c="4">4 متوازن</button>' +
+        '<button type="button" class="' + (state.concurrency === 6 ? 'selected' : '') + '" data-live-c="6">6 سريع</button>' +
+        '<button type="button" class="' + (state.concurrency === 8 ? 'selected' : '') + '" data-live-c="8">8 أقصى طاقة</button>' +
+      '</div>' +
+      '<span class="lcb-hint">(' + (state.activeWorkers || 0) + ' قيد التنفيذ الآن)</span>' +
+    '</div>';
+
+    html += '<div class="progress-card">' +
+      '<div class="progress-top"><span class="lbl">' + esc(prog.label) + '</span><span class="pct">' + prog.pct + '%</span></div>' +
+      '<div class="bar"><i style="width:' + prog.pct + '%"></i></div>' +
+      '<div class="progress-foot"><span>' + (prog.total ? prog.done + " من " + prog.total : "—") + '</span><span>' + esc(prog.foot) + '</span></div>' +
+    '</div>';
+
+    if (state.results.length){
+      var ok = state.results.filter(function(r){ return r.status === "ok"; }).length;
+      var hasFinished = state.results.some(function(r){ return r.status !== "run"; });
+      var clearBtn = hasFinished ? '<button type="button" class="btn ghost" style="font-size:11px;padding:2px 8px;margin-inline-start:auto" data-action="clear-finished">🗑️ مسح المكتملة</button>' : '';
+      html += '<div class="results-head"><h3>الحسابات والعمليات</h3><span style="display:flex;align-items:center;gap:6px">' + state.results.length + ' عملية · ' + ok + ' ناجحة' + clearBtn + '</span></div>';
+    }
+
+    html += '<div id="results" class="results"></div>';
+
+    if (state.type === "game"){
+      html += '<details class="bank"' + (state.bankOpen ? " open" : "") + '><summary>📚 بنك نتائج الجولات <span class="muted">آخر 3 نتائج</span></summary><div class="bank-body" id="gameBankBody"><div class="empty">📚 لا توجد نتائج محفوظة بعد — البيانات بتتخزّن تلقائيًا بعد كل جولة.</div></div></details>';
+    }
+
+    host.innerHTML = html;
+    var bank = host.querySelector("details.bank");
+    if (bank) bank.addEventListener("toggle", function(){ state.bankOpen = bank.open; });
+    if (state.type === "game") refreshGameBank();
+    renderResults();
+  }
+
+  async function refreshGameBank(){
+    var bankEl = document.querySelector("details.bank");
+    var bodyEl = document.getElementById("gameBankBody");
+    if (!bankEl || !bodyEl) return;
+    var bank = {};
+    try {
+      const r = await (await fetch("/api/game_results")).json();
+      bank = (r && r.data) || {};
+    } catch (e) { return; }
+    var codes = Object.keys(bank);
+    if (!codes.length) {
+      bodyEl.innerHTML = '<div style="color:var(--muted);padding:0 12px 12px;font-size:12.5px">لا توجد نتائج محفوظة بعد — البيانات بتتخزّن تلقائيًا بعد كل جولة.</div>';
+      return;
+    }
+    var html = "";
+    for (var i = 0; i < codes.length; i++) {
+      var code = codes[i];
+      var recs = [...(bank[code] || [])].reverse().slice(0, 3);
+      if (!recs.length) continue;
+      html += '<div style="font-weight:700;margin-top:6px;color:var(--purple-light)">الحساب ' + esc(code) + " — آخر الجولات:</div>";
+      html += recs.map(function(r) {
+        var g = String(r.grade || "-");
+        var gcls = g === "SS" ? "ok" : g === "S" ? "ok" : g === "A" ? "wrn" : "err";
+        return '<div><span class="t" style="color:var(--muted)">' + esc(r.date || "") + "</span> " +
+          '<span class="' + gcls + '" style="font-weight:700">' + esc(g) + "</span> " +
+          "سكور " + esc(r.totalScore ?? "") + "/100 • عائد " + esc(r.returnScore ?? "") + "/70 • تنويع " + esc(r.diversityScore ?? "") + "/30 • " +
+          "الأصول " + esc(r.finalAssets ?? "") + " • الربح " + esc(r.profit ?? "") + " • ترتيب " + esc(r.rank ?? "") + " • جولة " + esc(r.gameId ?? "");
+      }).join("");
+      html += '<div style="color:var(--muted);margin:4px 0 8px;border-bottom:1px dashed var(--line);"></div>';
+    }
+    bodyEl.innerHTML = html;
+  }
+
+  function renderActionBar(){
+    var primary = $("#abPrimary");
+    var meta = $("#abMeta");
+    var back = $("#backBtn");
+    if (!primary) return;
+
+    var prog = progressSnapshot();
+    var over = totalJobs() > 20;
+
+    if (state.step === 4){
+      var html = "";
+      if (state.serverRunningCount > 0){
+        html += '<button class="btn danger" type="button" data-action="stop">■ إيقاف الكل</button>';
+        html += '<button class="btn primary" type="button" data-action="new-job" style="margin-inline-start:8px">＋ إضافة حسابات أخرى</button>';
+        meta.innerHTML = 'جاري التشغيل (' + state.serverRunningCount + ') — <b>' + prog.done + ' / ' + prog.total + '</b>';
+      } else if (state.finished){
+        html += '<button class="btn primary" type="button" data-action="restart">↻ عملية جديدة</button>';
+        meta.innerHTML = "انتهت — <b>" + prog.foot + "</b>";
+      } else {
+        html += '<button class="btn primary" type="button" data-action="start" ' + (over ? "disabled" : "") + '>▶ ابدأ الحل</button>';
+        meta.innerHTML = 'جاهز للبدء · <b>' + totalJobs() + '</b> عملية';
+      }
+      primary.innerHTML = html;
+      back.hidden = false;
+      return;
+    }
+
+    var nextDisabled = (state.step === 1 && !state.type) ? "disabled" : "";
+    var phtml = '<button class="btn primary" type="button" data-action="next" ' + nextDisabled + '>التالي ←</button>';
+    if (state.serverRunningCount > 0){
+      phtml += '<button class="btn secondary" type="button" onclick="showLiveJobs()" style="margin-inline-start:8px">👁️ العمليات الجارية (' + state.serverRunningCount + ')</button>';
+    }
+    primary.innerHTML = phtml;
+    meta.innerHTML = 'الخطوة <b>' + state.step + '</b> من 4';
+    back.hidden = state.step === 1;
+  }
+
+  /* ===== Alerts / toast ===== */
+  function showAlert(id, msg, kind){
+    var el = $("#" + id);
+    if (!el) return;
+    el.className = "alert " + (kind || "error");
+    el.textContent = msg;
+    el.hidden = false;
+  }
+  function clearAlert(id){
+    var el = $("#" + id);
+    if (!el) return;
+    el.hidden = true;
+    el.textContent = "";
+  }
+  var toastTimer = null;
+  function toast(msg){
+    var el = $("#toast");
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.classList.remove("show"); }, 2200);
+  }
+
+  /* ===== Navigation ===== */
+  function go(n){
+    n = Math.max(1, Math.min(4, n));
+    state.step = n;
+    if (n > state.maxStep) state.maxStep = n;
+    renderAll();
+    var top = $(".stepper");
+    if (top) top.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
+
+  function invalidateResults(){
+    if (state.serverRunningCount > 0) return;
+    if (!state.results.length && !state.finished) return;
+    state.results = [];
+    state.openLogs = {};
+    state.finished = false;
+    state.running = false;
+    if (state.timer){ clearInterval(state.timer); state.timer = null; }
+  }
+
+  function next(){
+    clearAlert("step2Alert");
+    clearAlert("accAlert");
+    clearAlert("runAlert");
+
+    if (state.step === 1){
+      if (!state.type){ toast("اختار نوع الحل الأول"); return; }
+      go(2);
+      return;
+    }
+
+    if (state.step === 2){
+      if ((state.type === "qureo" || state.type === "both") && state.courses.length === 0){
+        showAlert("step2Alert", "اختر مسارًا واحدًا على الأقل من Qureo: Python أو JavaScript.");
+        return;
+      }
+      if (state.type === "qureo2" && state.lang !== "ar" && state.lang !== "en"){
+        state.lang = "ar";
+      }
+      go(3);
+      return;
+    }
+
+    if (state.step === 3){
+      var withCode = state.accounts.filter(function(a){ return a.code.trim(); });
+      var missingPw = withCode.filter(function(a){ return !a.password; });
+      var complete = withCode.filter(function(a){ return a.password; });
+      if (missingPw.length){
+        showAlert("accAlert", "فيه " + missingPw.length + " كود بدون كلمة مرور — أكمله أو احذفه.");
+        return;
+      }
+      if (!complete.length){
+        showAlert("accAlert", "اكتب كود وكلمة مرور لحساب واحد على الأقل.");
+        return;
+      }
+      var codes = complete.map(function(a){ return a.code.trim(); });
+      var dup = codes.filter(function(c, i){ return codes.indexOf(c) !== i; });
+      if (dup.length){
+        showAlert("accAlert", "فيه كود مكرر: " + dup[0] + " — شيل التكرار الأول.");
+        return;
+      }
+      state.accounts = complete.map(function(a){ return { code: a.code.trim(), password: a.password }; });
+      renderAccounts();
+      go(4);
+      return;
+    }
+
+    if (state.step === 4 && !state.finished){
+      startRun();
+    }
+  }
+
+  function detailFor(kind){
+    if (kind === "qureo"){
+      if (state.type === "qureo2") return "Qureo — JavaScript (" + langLabel() + ")";
+      return "Qureo (" + coursesLabel() + ")";
+    }
+    if (kind === "spx") return subjectLabel();
+    return "لعبة الأسهم — 30 يومًا";
+  }
+
+  function collectPayload(){
+    var complete = completeAccounts();
+    var payload = {
+      mode: state.type,
+      accounts: complete.map(function(a){ return { code: a.code, password: a.password }; }),
+      concurrency: state.concurrency || 4
+    };
+    if (state.type === "spx" || state.type === "both") payload.subject = state.subject;
+    if (state.type === "qureo" || state.type === "both") payload.courses = state.courses;
+    if (state.type === "game") payload.start_new = !!state.gameNew;
+    if (state.type === "qureo2") {
+      payload.lang = state.lang;
+      payload.courses = ["JavaScript"];
+    }
+    payload.turbo = !!state.turbo;
+    return payload;
+  }
+
+  async function startRun(){
+    var complete = completeAccounts();
+    if (!complete.length){
+      showAlert("runAlert", "مفيش حسابات كاملة. ارجع للخطوة 3.");
+      return;
+    }
+    if (totalJobs() > 20){
+      showAlert("runAlert", "الحد الأقصى 20 عملية في المرة. قلّل الحسابات أو غيّر النوع.");
+      return;
+    }
+
+    clearAlert("runAlert");
+    var payload = collectPayload();
+    try {
+      const res = await fetch("/api/start", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      const r = await res.json();
+      if (!r || !r.ok) { showAlert("runAlert", (r && r.message) || "تعذّر البدء."); return; }
+      toast(r.message || "بدأت العملية بنجاح!");
+      clearAlert("runAlert");
+      state.maxStep = 4;
+      state.step = 4;
+      state.running = true;
+      state.finished = false;
+      renderAll();
+      poll();
+    } catch (e) {
+      showAlert("runAlert", "تعذّر الاتصال بالخادم — تأكد أن الأداة شغالة.");
+    }
+  }
+
+  async function setConcurrency(val){
+    val = Number(val) || 4;
+    state.concurrency = val;
+    try { localStorage.setItem("preferred_concurrency", val); } catch(e){}
+    renderStep2();
+    renderReview();
+    try {
+      await fetch("/api/concurrency", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ concurrency: val })
+      });
+      toast("تم ضبط سرعة الحل المتزامن: " + val + " حسابات معاً ⚡");
+      poll();
+    } catch(e){}
+  }
+
+  var pollTimer = null;
+  function applyStatus(s){
+    if (!s) return;
+    var accs = s.accounts || [];
+    state.serverRunningCount = s.running_count != null ? s.running_count : accs.filter(function(a){ return a.running; }).length;
+    state.running = state.serverRunningCount > 0;
+    state.finished = accs.length > 0 && state.serverRunningCount === 0;
+    if (s.concurrency != null) state.concurrency = s.concurrency;
+    state.activeWorkers = s.active_workers || 0;
+
+    state.results = accs.map(function(a){
+      return {
+        id: a.id || a.code,
+        code: a.code,
+        mode: a.mode,
+        detail: a.detail || "",
+        status: a.running ? "run" : (a.finished ? (a.success ? "ok" : "fail") : "wait"),
+        phase: a.phase || "",
+        message: a.message || "",
+        title: (a.progress && a.progress.title) || a.phase || "",
+        done: (a.progress && a.progress.done) || 0,
+        total: (a.progress && a.progress.total) || 0,
+        lines: a.lines || []
+      };
+    });
+
+    renderLiveBanner();
+    if (state.step === 4) {
+      renderReview();
+      renderActionBar();
+      renderStepper();
+    }
+  }
+
+  async function poll(){
+    clearTimeout(pollTimer);
+    try {
+      const res = await fetch("/api/status");
+      const s = await res.json();
+      applyStatus(s);
+    } catch (e) {}
+    var interval = (state.serverRunningCount > 0 || state.step === 4) ? 900 : 2000;
+    pollTimer = setTimeout(poll, interval);
+  }
+
+  async function stopRun(){
+    try {
+      await fetch("/api/stop", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}) });
+      toast("تم طلب إيقاف جميع العمليات...");
+      poll();
+    } catch (e) {}
+  }
+
+  async function stopSingle(code){
+    if (!code) return;
+    try {
+      const res = await fetch("/api/stop", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code: code }) });
+      const r = await res.json();
+      toast((r && r.message) || ("تم طلب إيقاف الحساب: " + code));
+      poll();
+    } catch (e) {}
+  }
+
+  async function clearFinished(){
+    try {
+      const res = await fetch("/api/clear_finished", { method: "POST" });
+      const r = await res.json();
+      toast((r && r.message) || "تم مسح العمليات المكتملة");
+      poll();
+    } catch (e) {}
+  }
+
+  function restart(){
+    state.step = 1;
+    state.maxStep = 1;
+    state.openLogs = {};
+    state.finished = false;
+    renderAll();
+    var top = $(".stepper");
+    if (top) top.scrollIntoView({ block: "start", behavior: "smooth" });
+    toast("جاهز لعملية جديدة — الأكواد محفوظة");
+  }
+
+  /* ===== Events ===== */
+  document.addEventListener("click", function(e){
+    var stepBtn = e.target.closest(".step");
+    if (stepBtn){
+      var n = Number(stepBtn.getAttribute("data-step"));
+      if (!stepBtn.disabled && n <= state.maxStep) go(n);
+      return;
+    }
+
+    var typeCard = e.target.closest(".type-card");
+    if (typeCard){
+      var t = typeCard.getAttribute("data-type");
+      if (state.type !== t) invalidateResults();
+      state.type = t;
+      if (t === "qureo2" && state.lang !== "ar" && state.lang !== "en") state.lang = "ar";
+      clearAlert("step2Alert");
+      renderAll();
+      return;
+    }
+
+    var choice = e.target.closest("[data-subject]");
+    if (choice){
+      var nextSubject = choice.getAttribute("data-subject");
+      if (state.subject !== nextSubject) invalidateResults();
+      state.subject = nextSubject;
+      renderStep2();
+      renderActionBar();
+      return;
+    }
+
+    var chip = e.target.closest("[data-course]");
+    if (chip){
+      var c = chip.getAttribute("data-course");
+      var i = state.courses.indexOf(c);
+      if (i === -1) state.courses.push(c);
+      else state.courses.splice(i, 1);
+      state.courses = ["Python", "JavaScript"].filter(function(x){ return state.courses.indexOf(x) !== -1; });
+      invalidateResults();
+      renderStep2();
+      return;
+    }
+
+    var seg = e.target.closest("[data-lang]");
+    if (seg){
+      var nextLang = seg.getAttribute("data-lang");
+      if (state.lang !== nextLang) invalidateResults();
+      state.lang = nextLang;
+      renderStep2();
+      return;
+    }
+
+    var cBtn = e.target.closest("[data-concurrency]");
+    if (cBtn){
+      var cv = cBtn.getAttribute("data-concurrency");
+      setConcurrency(cv);
+      return;
+    }
+
+    var liveC = e.target.closest("[data-live-c]");
+    if (liveC){
+      var lcv = liveC.getAttribute("data-live-c");
+      setConcurrency(lcv);
+      return;
+    }
+
+    var action = e.target.closest("[data-action]");
+    if (action){
+      var a = action.getAttribute("data-action");
+
+      if (a === "next"){ next(); return; }
+      if (a === "back"){ go(state.step - 1); return; }
+      if (a === "start"){ startRun(); return; }
+      if (a === "stop"){ stopRun(); return; }
+      if (a === "restart"){ restart(); return; }
+      if (a === "edit-settings"){ go(2); return; }
+      if (a === "new-job"){ go(1); return; }
+      if (a === "stop-single"){ stopSingle(action.getAttribute("data-code")); return; }
+      if (a === "clear-finished"){ clearFinished(); return; }
+
+      if (a === "add-account"){
+        invalidateResults();
+        state.accounts.push({ code: "", password: "" });
+        renderAccounts();
+        var last = $("#accounts .account:last-child .acc-code");
+        if (last) last.focus();
+        return;
+      }
+
+      if (a === "del-account"){
+        var row = action.closest(".account");
+        var idx = Number(row.getAttribute("data-i"));
+        invalidateResults();
+        state.accounts.splice(idx, 1);
+        if (!state.accounts.length) state.accounts.push({ code: "", password: "" });
+        renderAccounts();
+        clearAlert("accAlert");
+        return;
+      }
+
+      if (a === "eye"){
+        var wrap = action.closest(".pw-wrap");
+        var input = wrap.querySelector("input");
+        var showing = input.type === "text";
+        input.type = showing ? "password" : "text";
+        action.textContent = showing ? "👁" : "🙈";
+        action.setAttribute("aria-label", showing ? "إظهار كلمة المرور" : "إخفاء كلمة المرور");
+        return;
+      }
+
+      if (a === "toggle-log"){
+        var ri = Number(action.getAttribute("data-i"));
+        state.openLogs[ri] = !state.openLogs[ri];
+        renderResults();
+        return;
+      }
+    }
+  });
+
+  document.addEventListener("input", function(e){
+    var row = e.target.closest(".account");
+    if (!row) return;
+    var i = Number(row.getAttribute("data-i"));
+    if (!state.accounts[i]) return;
+    if (e.target.classList.contains("acc-code")){
+      state.accounts[i].code = e.target.value;
+      invalidateResults();
+      clearAlert("accAlert");
+    } else if (e.target.classList.contains("acc-pw")){
+      state.accounts[i].password = e.target.value;
+      invalidateResults();
+      clearAlert("accAlert");
+    }
+  });
+
+  document.addEventListener("change", function(e){
+    if (e.target.id === "turbo"){
+      state.turbo = e.target.checked;
+      renderActionBar();
+    }
+    if (e.target.id === "gameNew"){
+      if (state.gameNew !== e.target.checked) invalidateResults();
+      state.gameNew = e.target.checked;
+    }
+  });
+
+  document.addEventListener("paste", function(e){
+    var input = e.target.closest && e.target.closest(".acc-code");
+    if (!input) return;
+    var text = (e.clipboardData || window.clipboardData).getData("text");
+    if (!text || (!text.includes("\n") && !text.includes(":"))) return;
+
+    e.preventDefault();
+    var parsed = text.split(/\r?\n/).map(function(line){
+      var parts = line.trim().split(/\s*[:,\t]\s*/);
+      if (parts.length < 2) return null;
+      var code = parts[0].trim();
+      var pw = parts.slice(1).join(" ").trim();
+      if (!code || !pw) return null;
+      return { code: code, password: pw };
+    }).filter(Boolean);
+
+    if (!parsed.length){
+      toast("الصيغة غير مفهومة — استخدم: كود : باسورد");
+      return;
+    }
+
+    invalidateResults();
+    var row = input.closest(".account");
+    var idx = Number(row.getAttribute("data-i"));
+    var existing = state.accounts.map(function(x){ return x.code.trim(); });
+    var seen = {};
+    var toAdd = parsed.filter(function(p){
+      if (existing.indexOf(p.code) !== -1 || seen[p.code]) return false;
+      seen[p.code] = true;
+      return true;
+    });
+    if (state.accounts[idx] && !state.accounts[idx].code.trim()){
+      state.accounts.splice(idx, 1);
+    }
+    state.accounts = state.accounts.concat(toAdd);
+    if (!state.accounts.length) state.accounts.push({ code: "", password: "" });
+    renderAccounts();
+    toast("تمت إضافة " + toAdd.length + " حساب");
+  });
+
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    window.__deferredInstallPrompt = e;
+    const installBtn = document.getElementById("installBtn");
+    if (installBtn) installBtn.hidden = false;
+  });
+  window.addEventListener("appinstalled", () => {
+    const installBtn = document.getElementById("installBtn");
+    if (installBtn) installBtn.hidden = true;
+  });
+  $("#installBtn").addEventListener("click", async () => {
+    const btn = document.getElementById("installBtn");
+    const prompt = window.__deferredInstallPrompt;
+    if (!prompt) {
+      if (btn) btn.hidden = true;
+      return toast("التثبيت غير متاح في هذا المتصفح.");
+    }
+    prompt.prompt();
+    try { await prompt.userChoice; } catch (e) {}
+    window.__deferredInstallPrompt = null;
+    if (btn) btn.hidden = true;
+  });
+
+  // Boot
+  renderAll();
+  poll().then(function(){
+    if (state.serverRunningCount > 0){
+      state.maxStep = 4;
+      state.step = 4;
+      renderAll();
+    }
+  });
+})();
+</script>
+</body>
+</html>
